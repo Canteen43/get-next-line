@@ -25,26 +25,14 @@ void	write_string(int fd, char *str)
 	write(fd, str, i);
 }
 
-void	put_linenumber(int linenumber)
-{
-	char	a;
-
-	a = '0' + linenumber;
-	write_string(1, "Line ");
-	write(1, &a, 1);
-	write_string(1, ": ");
-}
-
 int	ft_error_codes(int error_code)
 {
-	if (error_code == 0)
-		write_string(2, "\nFile name missing.");
 	if (error_code == 1)
-		write_string(2, "\nNo or too many file names.");
+		printf("No or too many file names.\n");
 	if (error_code == 2)
-		write_string(2, "\nCannot open file.");
+		printf("Cannot open file.\n");
 	if (error_code == 3)
-		write_string(2, "\nFunction returned NULL.");
+		printf("\nFunction returned NULL.\n");
 	return (1);
 }
 
@@ -69,8 +57,8 @@ int	main(int argc, char *argv[])
 			return (ft_error_codes(3));
 		}
 		line_number++;
-		put_linenumber(line_number);
-		write_string(1, next_line);
+		printf("Line %d: %s", line_number, next_line);
+		fflush(stdout);
 		free(next_line);
 	}
 	close(fd);
